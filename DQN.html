@@ -95,7 +95,51 @@ Here I try to answer some of the questions that I orginally had while reading DQ
 
 As we said before, \(Q\) follows the bellman equation: 
 
-$$ $$
+
+$$Q^*(s,a) = max_{\pi} \mathbb{E}\{{R}_t|{S}_t=s, a_t=a,\pi\} = \mathbb{E}_{s' \sim \epsilon} [r+\gamma max_{a'} Q'(s',a') | s,a]  $$
+In which \(\epsilon\) is the environment that the agent is interacting with.
+Given that the optimal value of \(Q^*(s',a')\) for the state \(s'\) is known for all possible actions \(a'\). In our case neural network will provide an estimate of possible values for all actions.</br>
+
+The loss function for the neural network is as follows: </br>
+$$ \mathbb{E}_{s,a \sim \rho(.) } [(y_i - Q(s,a;\theta_i))^2] $$
+$$ y_i = \mathbb{E}_{s' \sim \epsilon} [r + \gamma max_{a'} Q(s',a';\theta_{i-1}) ]$$
+Note that we are using \(\theta{i-1}\) in the notation for \(y_i\) in order to update the weights of neural network. 
+
+$$ You have to talk about \theta i -1 here $$
+
+</br>
+Also, unlike supervised learning, here the target value depends on the weights of neural network. In supervised value the target value is known beforehand. Also, \(s,a \sim \rho(.)\)  is actually the relply memory that we sample from.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </p>
