@@ -21,11 +21,11 @@ The main idea of these two papers is to be able to beat the computer at Atari ga
 
 The papers combine ideas from reinforcement learning (Q-learning) and deep learning (CNN) in order to achieve the performance.
 
-First let's talk about Q-learning. Q-learning is a dynamic programming approach for updating our estimation about agent's future success. In Q-learning agents experience consists of a sequence of distinct stages or episodes. In the \(n^{th}\) episode, agent: </br>
+First let's talk about Q-learning. Q-learning is a dynamic programming approach for updating our estimation about agent's future success. In Q-learning agents experience consists of a sequence of distinct stages or episodes. At the \(t^{th}\) times states of the \(n^{th}\) episode, agent: </br>
 
-Observes its current state \(x_n\) </br>
-Selects and performs an action \(a_n\) </br>
-Observes the subsequenct state \(x_{n+1}\) </br>
+Observes its current state \(s_t\) </br>
+Selects and performs an action \(a_t\) </br>
+Observes the subsequenct state \(s_{t+1}\) </br>
 Adjusts its Q<sub>n-1</sub> value using the learning factor \(\alpha_{n}\) according to </br>
 
 
@@ -42,14 +42,14 @@ Adjusts its Q<sub>n-1</sub> value using the learning factor \(\alpha_{n}\) accor
   >{{}}r@{}% no padding
   >{{}}l@{}% no padding
 }
-  (1-\alpha_{n})Q_{n-1}(x,a) + [r + \gamma V_{n-1}(x_{n+1}) ]& \\
-  Q_{n-1}(x,a) & terminal &state
+  (1-\alpha_{n})Q_{n-1}(s_t,a) + [r + \gamma V_{n-1}(s_{t+1}) ]& \\
+  Q_{n-1}(s_t,a) & terminal &state
 \end{array}
 \right.
 \]
 
-in which \(V_{n-1}(x_{n+1})\) is the best possible value that the agent can achieve from state \(x_{n+1}\) on ward, in other words <b>expected future reward</b>.
-$$V_{n-1}(x_{n+1}) = \max_{b} {Q_{n-1}(x_{n+1},b)}$$ 
+in which \(V_{n-1}(s_{t+1})\) is the best possible value that the agent can achieve from state \(s_{t+1}\) on ward, in other words <b>expected future reward</b>.
+$$V_{n-1}(s_{t+1}) = \max_{b} {Q_{n-1}(s_{t+1},b)}$$ 
 
 \(\alpha_n\) is the learning factor </br>
 
@@ -57,6 +57,20 @@ If \(\alpha_n = 0\), agent does not learn and exploits prior information.</br>
 If \(\alpha_n = 1\), agent learns new things and explres the environment.</br>
 
 
+One thing that comes very handy in reinforcement learning is the Bellman Equation. Bellman equation is a way of discounted future reward.</br>
+
+$$R_t = r_t + \gamma (r_{t+1} + \gamma ( r_{t+2} + ...)) = r_t + \gamma R_{t+1}$$ </br>
+Since we use \(Q\) in order to express expected future reward. We will have: </br>
+$$Q(s_t, a) = max_{\pi}  R_{t+1}$$
+\(\pi(s) = argmax_{a} Q(s, a)  \) is the policy that leads to the best reward \(Q(s,a)\). </br>
+For simple transition \({<}s_t,a,r,s_{t+1}{>}\), bellman equationw would be: </br>
+$$Q(s_t,a) = r + \gamma max_{a'} Q(s_{t+1},a')$$ </br>
+In <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> paper that was published in 2013, convolutiona neural network (CNN) is a function to estimate \(Q\). The actual reward \(r\) at each time step is being return by the simulation environment which the authors call it emulator. </br>
+The overall workflow of the DQN consists of two major part. Here we will cover each part in detail: </br>
+<b>Part 1:</b></br>
+
+This part has to do with the memory. Suppose the agent is at state \(s_t\). The state is the images pixels of the Atari game. The take 4 consecutive frames and stack them over each other and cosider that as \(s_t\). \(s_t\) will be fed into the CNN. It will output multiple \(Q\) values corresponding to each action. For example, if a game has 4 different possible actions then the network will output 4 diffent \(Q\) values corresponding to each action.
+<b>Part 2:</b></br>
 
 
 
