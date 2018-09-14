@@ -69,9 +69,10 @@ In <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> paper that was publish
 The overall workflow of the DQN consists of two major part. Here we will cover each part in detail: </br>
 <b>Part 1:</b></br>
 
-This part has to do with the memory. Suppose the agent is at state \(s_t\). The state is the images pixels of the Atari game. The take 4 consecutive frames and stack them over each other and cosider that as \(s_t\). \(s_t\) will be fed into the CNN. It will output multiple \(Q\) values corresponding to each action. For example, if a game has 4 different possible actions then the network will output 4 diffent \(Q\) values corresponding to each action. Now, the action corresponding to the highest \(Q\) values will be stored as \(a\). \(a\) will be fed to the emulator adn the emulator will return the reward \(r\) and the next state \(s_{t+1}\). Now \((s_t, a, r, s_{t+1})\) will be stored into the memory.
+This part has to do with the memory. Suppose the agent is at state \(s_t\). The state is the images pixels of the Atari game. The take 4 consecutive frames and stack them over each other and cosider that as \(s_t\). \(s_t\) will be fed into the CNN. It will output multiple \(Q\) values corresponding to each action. For example, if a game has 4 different possible actions then the network will output 4 diffent \(Q\) values corresponding to each action. Now, the action corresponding to the highest \(Q\) values will be stored as \(a\). \(a\) will be fed to the emulator adn the emulator will return the reward \(r\) and the next state \(s_{t+1}\). Now \((s_t, a, r, s_{t+1})\) will be stored into the memory.</br>
 
-$$Put \:the \:corresponding\: diagram\: that\: you\: have \:in\: your\: notes \:here!$$ 
+<p style="text-align:center;"><img height="258" width="505" src="img/netQ.png" align="middle"></p>
+
 </br>
 <b>Part 2:</b></br>
 In the \(2_nd\) part network learns and updates its parameters. Here something very interesting happens. As the authors point out in both <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> and <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> papers, the network is not trained based on the current state of the game. That's why their approach is off-policy. They train the network by taking a random sample \((s_t, a, r, s_{t+1})\) from memory. They are doing this for three main reasons. </br>
