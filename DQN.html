@@ -2,6 +2,15 @@
 <html>
 <head><meta charset="utf-8" />
 <title>DQN</title>
+<script type="text/javascript">
+	
+	$(".tiptext").mouseover(function() {
+    $(this).children(".description").show();
+}).mouseout(function() {
+    $(this).children(".description").hide();
+});
+</script>
+
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
@@ -9,18 +18,36 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
 <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-
 <style>
 p {
     margin: 10px;
 }
+.tiptext {
+    color:#069; 
+    cursor:pointer;
+}
+.description {
+    display:none;
+    position:absolute;
+    border:1px solid #000;
+    width:400px;
+    height:400px;
+}
 </style>
 <body>
-<p>In this post I am going to talk about Deap Q Learning (DQN). The main idea is based on two papers that were published in 2013 and 2015 by Google Deepmind. The <a href="https://arxiv.org/pdf/1312.5602.pdf">firt one</a> is a NIPS paper, lets call it DQN1 and the <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">second paper</a> is a nature paper and we call it DQN2 in this post. In order to make it easier for the general reader to follow, this post contains sub-posts that will dive deeper into the subject. This post is also accompanied by the code snippet of the tensorflow implementation of each part.</br></br>
+<p>In this post I am going to talk about Deap Q Learning (DQN). The main idea is based on two papers that were published in 2013 and 2015 by Google Deepmind. The <a href="https://arxiv.org/pdf/1312.5602.pdf">firt one</a> is a NIPS paper, lets call it DQN1 and the <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">second paper</a> is a nature paper and we call it DQN2 in this post. 
+</br></br>
 DQN1: Playing Atari with Deep Reinforcement Learning</br>
 DQN2: Human-level control through deep reinforcement learning </br></br>
 
-The main idea of these two papers is to be able to beat the computer at Atari games with no human intervention. 
+In order to make it easier for the general reader to follow, this post contains sub-posts that will dive deeper into the subject. This post is also accompanied by the code snippet of the tensorflow implementation of each part.
+</br></br>
+
+<a class="tiptext">This is a test
+ <iframe class="description" src="https://rozbeh.github.io/DQN.html"></iframe>
+ </a>
+</br></br>
+The main idea of these two papers is to be able to beat the computer at Atari games with no minimum supervision.
 
 The papers combine ideas from reinforcement learning (Q-learning) and deep learning (CNN) in order to achieve the performance.
 
