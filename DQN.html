@@ -2,22 +2,27 @@
 <html>
 <head><meta charset="utf-8" />
 <title>DQN</title>
-<script type="text/javascript">
-	
-	$(".tiptext").mouseover(function() {
-    $(this).children(".description").show();
-}).mouseout(function() {
-    $(this).children(".description").hide();
-});
-</script>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
 <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+<script type="text/javascript">
+	$(document).ready(function () {
+  $(".tiptext").mouseover(function() {
+    $(this).children(".description").show();
+}).mouseout(function() {
+    $(this).children(".description").hide();
+});
+});
+	
+</script>
+
 <style>
 p {
     margin: 10px;
@@ -32,6 +37,7 @@ p {
     border:1px solid #000;
     width:400px;
     height:400px;
+    background-color: white;
 }
 </style>
 <body>
@@ -43,7 +49,7 @@ DQN2: Human-level control through deep reinforcement learning </br></br>
 In order to make it easier for the general reader to follow, this post contains sub-posts that will dive deeper into the subject. This post is also accompanied by the code snippet of the tensorflow implementation of each part.
 </br></br>
 
-<a class="tiptext">This is a test
+<a href="https://rozbeh.github.io/DQN.html" class="tiptext">This is a test
  <iframe class="description" src="https://rozbeh.github.io/DQN.html"></iframe>
  </a>
 </br></br>
