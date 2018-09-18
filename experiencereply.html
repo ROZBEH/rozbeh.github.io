@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>DQN</title>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+<style>
+p {
+    margin: 9px;
+}
+</style>
+<body>
+<p><b>Experiece Reply</b></p>
+<p> In DQN papers, they train the network by taking a random sample \((s_t, a, r, s_{t+1})\) from memory. They are doing this for three main reasons. </br>
+<b>a.</b> Data efficiency </br>
+<b>b.</b> Learning directly from consecutive samples is inefficient due to correlation between samples </br>
+<b>c.</b> When learning 0n-policy, the current parameters determine the next data sampels that parameters are trained on. For example, if the maximizing action is to move left, then training samples will be dominated by sampels from left-hand side! This is called <b>Experience Replay</b> and it avoids diversion in parameters. The current parameters are different  from those used to generate samples because samples are taken from memory not current experience. </br>
+</p>
+</body>
+</html>
