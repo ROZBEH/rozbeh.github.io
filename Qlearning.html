@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>DQN</title>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+<style>
+p {
+    margin: 9px;
+}
+</style>
+<body>
+<p>Q-learning is a dynamic programming approach for updating our estimation about agent's future success. In Q-learning agents experience consists of a sequence of distinct stages or episodes. At the \(t^{th}\) times states of the \(n^{th}\) episode, agent: </br>
+
+Observes its current state \(s_t\) </br>
+Selects and performs an action \(a_t\) </br>
+Observes the subsequenct state \(s_{t+1}\) </br>
+Adjusts its Q<sub>n-1</sub> value using the learning factor \(\alpha_{n}\) according to </br>
+
+
+
+
+
+\[
+{Q_{n}(x,a)} =
+\left\{
+\begin{array}{
+  @{}% no padding
+  l@{\quad}% some padding
+  r@{}% no padding
+  >{{}}r@{}% no padding
+  >{{}}l@{}% no padding
+}
+  (1-\alpha_{n})Q_{n-1}(s_t,a) + [r + \gamma V_{n-1}(s_{t+1}) ]& \\
+  Q_{n-1}(s_t,a) & terminal &state
+\end{array}
+\right.
+\]
+
+in which \(V_{n-1}(s_{t+1})\) is the best possible value that the agent can achieve from state \(s_{t+1}\) on ward, in other words <b>expected future reward</b>.
+$$V_{n-1}(s_{t+1}) = \max_{b} {Q_{n-1}(s_{t+1},b)}$$ 
+
+\(\alpha_n\) is the learning factor </br>
+
+If \(\alpha_n = 0\), agent does not learn and exploits prior information.</br>
+If \(\alpha_n = 1\), agent learns new things and explres the environment.</br>
+
+
+</p>
+</body>
+</html>
