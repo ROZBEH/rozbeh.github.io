@@ -48,7 +48,7 @@ This part has to do with the memory. Suppose the agent is at state \(s_t\). The 
 
 </br>
 <b>Part 2:</b></br>
-In the \(2_nd\) part network learns and updates its parameters. Here something very interesting happens. As the authors point out in both <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> and <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> papers, the network is not trained based on the current state of the game. That's why their approach is off-policy. They train the network by taking a random sample \((s_t, a, r, s_{t+1})\) from memory. If you want to know why, follow <a href="experiencereply.html">this</a> short description.
+In the \(2^{nd}\) part network learns and updates its parameters. Here something very interesting happens. As the authors point out in both <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> and <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> papers, the network is not trained based on the current state of the game. That's why their approach is off-policy. They train the network by taking a random sample \((s_t, a, r, s_{t+1})\) from memory. If you want to know why, follow <a href="experiencereply.html">this</a> short description.</br>
 Once we sample \((s_t, a, r, s_{t+1})\) from memory, \(s_{t+1}\) will be fed into the network and network will output all possible \(Q\) values but we choose the one with the highest value and call it \(q'\). This value will be used to calculate the target action values \(Target_q = r + \gamma q' \). Now, we have to estimate our prediction about action value \(Q\). In order to do so, we pass \(s_{t+1}\) to the network and the network will output \(Q\) for all possible actions. We pick the one that corresponds to the action \(a\) and call it \(Prediction_q = r + \gamma q' \). At the end backpropagation happens on this cost function:</br>
 
 $$loss = (Target_q - Prediction_q)^2$$
@@ -76,9 +76,8 @@ Given that the optimal value of \(Q^*(s',a')\) for the state \(s'\) is known for
 The loss function for the neural network is as follows: </br>
 $$L_i(\theta) =  \mathbb{E}_{s,a \sim \rho(.) } [(y_i - Q(s,a;\theta_i))^2] $$
 $$ \text{Where: } y_i = \mathbb{E}_{s' \sim \epsilon} [r + \gamma max_{a'} Q(s',a';\theta_{i-1}) ]$$
-Note that we are using \(\theta{i-1}\) in the notation for \(y_i\) in order to update the weights of neural network. 
+Note that we are using \(\theta_{i-1}\) in the notation for \(y_i\) in order to update the weights of neural network. This is a very clever approach that they use in the paper. This makes the algorithm more stable. Generating targets using an older set of parameters adds a delay between the time an update to \(Q\) is made and the time update affects the target \(y_j\). This will make divergence and oscillation more unlikely. In other words predictions are based on parameters of a few steps back rather than the parameters that just have been updated.
 
-$$ You have to talk about \theta i -1 here $$
 
 </br>
 Also, unlike supervised learning, here the target value depends on the weights of neural network. In supervised value the target value is known beforehand. Also, \(s,a \sim \rho(.)\)  is actually the relply memory that we sample from.
@@ -96,9 +95,7 @@ $$ Q_{i+1}(s,a) = \mathbb{E} [r + \gamma max_{a'} Q_{i}(s',a')|s,a ]$$
 <p>The <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> paper is almost the same as the first one with few differences that I list here:
 <ul>
 	<li>In the second paper they add t-SNE visualization in order to show hidden representation of image frames. They show that similar image frames end up with similar 2-D representations.</li>
-	<li>They use two different networks for target network and prediction network. The parameters of target networks are non-trainable but parameters of prediction network are trainable. At every \(C\) iteration, parameteres of target network are cloned from prediction network. This makes the algorithm more stable. Generating targets using an older set of parameters adds a delay between the time an update to \(Q\) is made and the time update affects the target \(y_j\). This will make divergence and oscillation more unlikely.</li>
-	<li></li>
-	<li></li>
+	<li>They use two different networks for target network and prediction network. The parameters of target networks are non-trainable but parameters of prediction network are trainable. At every \(C\) iteration, parameteres of target network are cloned from prediction network.</li>
 </ul>
 </p>
 <p>
