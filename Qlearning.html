@@ -19,7 +19,7 @@ p {
 <p><b>Q Learning</b></p>
 <p>Q-learning is a dynamic programming approach for updating our estimation about agent's 
   future success. In Q-learning agents experience consists of a sequence of distinct stages 
-  or episodes. At the \(t^{th}\) times states of the \(n^{th}\) episode, agent: </br>
+  or episodes. At the \(t^{th}\) times of the \(n^{th}\) episode, agent: </br>
 
 Observes its current state \(s_t\) </br>
 Selects and performs an action \(a_t\) </br>
@@ -31,7 +31,7 @@ Adjusts its Q<sub>n-1</sub> value using the learning factor \(\alpha_{n}\) accor
 
 
 \[
-{Q_{n}(x,a)} =
+{Q_{n}(s_t,a)} =
 \left\{
 \begin{array}{
   @{}% no padding
@@ -52,7 +52,7 @@ $$V_{n-1}(s_{t+1}) = \max_{b} {Q_{n-1}(s_{t+1},b)}$$
 \(\alpha_n\) is the learning factor </br>
 
 If \(\alpha_n = 0\), agent does not learn and exploits prior information.</br>
-If \(\alpha_n = 1\), agent learns new things and explres the environment.</br>
+If \(\alpha_n = 1\), agent learns new things and explores the environment.</br>
 
 
 </p>
