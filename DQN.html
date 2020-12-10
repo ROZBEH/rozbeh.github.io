@@ -16,7 +16,11 @@ p {
 }
 </style>
 <body>
-<p>In this post I am going to talk about Deap Q Learning (DQN). The main idea is based on two papers that were published in 2013 and 2015 by Google Deepmind. The <a href="https://arxiv.org/pdf/1312.5602.pdf">firt one</a> is a NIPS paper, lets call it DQN1 and the <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">second paper</a> is a nature paper and we call it DQN2 in this post. 
+<p>In this post I am going to talk about Deap Q Learning (DQN). The main idea is based 
+  on two papers that were published in 2013 and 2015 by Google Deepmind. 
+  The <a href="https://arxiv.org/pdf/1312.5602.pdf">firt one</a> is a NIPS paper, 
+  lets call it DQN1 and the <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">second paper</a> 
+  is a nature paper and we call it DQN2 in this post. 
 </br></br>
 DQN1: Playing Atari with Deep Reinforcement Learning</br>
 DQN2: Human-level control through deep reinforcement learning </br></br>
@@ -42,7 +46,7 @@ In <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> paper that was publish
 The overall workflow of the DQN consists of two major part. Here we will cover each part in detail: </br>
 <b>Part 1:</b></br>
 
-This part has to do with the memory. Suppose the agent is at state \(s_t\). The state is the images pixels of the Atari game. The take 4 consecutive frames and stack them over each other and cosider that as \(s_t\). \(s_t\) will be fed into the CNN. It will output multiple \(Q\) values corresponding to each action. For example, if a game has 4 different possible actions then the network will output 4 diffent \(Q\) values corresponding to each action. Now, the action corresponding to the highest \(Q\) values will be stored as \(a\). \(a\) will be fed to the emulator adn the emulator will return the reward \(r\) and the next state \(s_{t+1}\). Now \((s_t, a, r, s_{t+1})\) will be stored into the memory.</br>
+This part has to do with the memory. Suppose the agent is at state \(s_t\). The state is the images pixels of the Atari game. The take 4 consecutive frames and stack them over each other and cosider that as \(s_t\). \(s_t\) will be fed into the CNN. It will output multiple \(Q\) values corresponding to each action. For example, if a game has 4 different possible actions then the network will output 4 diffent \(Q\) values corresponding to each action. Now, the action corresponding to the highest \(Q\) values will be stored as \(a\). \(a\) will be fed to the emulator and the emulator will return the reward \(r\) and the next state \(s_{t+1}\). Now \((s_t, a, r, s_{t+1})\) will be stored into the memory.</br>
 
 <p style="text-align:center;"><img height="258" width="505" src="img/netQ.png" align="middle"></p>
 
@@ -88,18 +92,35 @@ Also, unlike supervised learning, here the target value depends on the weights o
   <li>Authors in <a href="https://arxiv.org/pdf/1312.5602.pdf">DQN1</a> paper show that there are two ways to show the progress of training. Average \(Q\) value and average <b>reward</b> over the course of training. As it turns out, average \(Q\) is a better measure of how the agent is learning.</li>
 </ul>  
 </p>
-<p>Here I am going to talke about a little bit of history. Before using CNN for estimating value function \(Q\), there use to be a table for \(Q\) in which rows were state and columns were actions. The update process worked like this
+<p>Here I am going to talke about a little bit of
+   history. Before using CNN for estimating value function \(Q\), there use to
+    be a table for \(Q\) in which rows were state and columns were actions. 
+    The update process worked like this
 $$ Q_{i+1}(s,a) = \mathbb{E} [r + \gamma max_{a'} Q_{i}(s',a')|s,a ]$$ 
-\(Q_i\) Approaches to the optimal value function as \(i\rightarrow\infty\). The size of the table is \(|s| \times |a| \) in which \(|s|\) is the total number of states and \(|a|\) is total number of possible actions that the agent can take. This table will get updated at each episode. Doing this is impractical due to the large number of states and instead we use a function approximator. In the case of DQN, we are using Deep NN in order to perform this where \(Q_i(s',a')\) is estimated by CNN and \(Q_{i+1}\) is used in the loss function to backpropagate and update the weights.
+\(Q_i\) Approaches to the optimal value function as \(i\rightarrow\infty\). 
+The size of the table is \(|s| \times |a| \) in which \(|s|\) is the total number 
+of states and \(|a|\) is total number of possible actions that the agent can take. 
+This table will get updated at each episode. Doing this is impractical due to the 
+large number of states and instead we use a function approximator. In the case of 
+DQN, we are using Deep NN in order to perform this where \(Q_i(s',a')\) is estimated
+ by CNN and \(Q_{i+1}\) is used in the loss function to backpropagate and update the weights.
  </p>
-<p>The <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> paper is almost the same as the first one with few differences that I list here:
+<p>The <a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">DQN2</a> 
+  paper is almost the same as the first one with few differences that I list here:
 <ul>
 	<li>In the second paper they add t-SNE visualization in order to show hidden representation of image frames. They show that similar image frames end up with similar 2-D representations.</li>
 	<li>They use two different networks for target network and prediction network. The parameters of target networks are non-trainable but parameters of prediction network are trainable. At every \(C\) iteration, parameteres of target network are cloned from prediction network.</li>
 </ul>
 </p>
 <p>
-As mentioned in DQN2 paper, one of the possible future areas of exploration could be choosing best memories and discarding memories that do not have sufficient information. Right now, they just override the oldest memories with the newest episodes. What could be done differently? <a href="https://pdfs.semanticscholar.org/6086/ab80f6d2ba77dd7da65c3cadf8cf5fb019ae.pdf">This</a> work good be a good starting point. One idea could be, after \(M\) number of episodes of training, we could use t-SNE or other dimensionality reduction algorithms in order to remove similar memories and keep few of them instead of having a lot of similar experiences.
+As mentioned in DQN2 paper, one of the possible future areas of exploration 
+could be choosing best memories and discarding memories that do not have sufficient 
+information. Right now, they just override the oldest memories with the newest episodes.
+ What could be done differently? <a href="https://pdfs.semanticscholar.org/6086/ab80f6d2ba77dd7da65c3cadf8cf5fb019ae.pdf">
+  This</a> work good be a good starting point. One idea could be, after \(M\) number of
+   episodes of training, we could use t-SNE or other dimensionality reduction algorithms
+    in order to remove similar memories and keep few of them instead of having a lot of
+     similar experiences.
 
 Next: Add plots, code snippets, adding subblogs.
 </p>
