@@ -5,3 +5,17 @@
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
+
+pre.highlight {
+    padding: 8px 12px;
+    position: relative;
+}
+
+/* Copy code to clipboard button styles */
+.copy {
+    color: #080808;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    opacity: 1;
+}
