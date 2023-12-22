@@ -293,7 +293,7 @@ minima:
 ```
 
 Apart from the necessary keys illustrated above, `title` may also be defined to render a custom link-title. By default, the title is the same
-as `platform`. The `platform` key corresponds to the SVG id of the sprite in the composite file at URL `/private/assets/minima-social-icons.svg`.
+as `platform`. The `platform` key corresponds to the SVG id of the sprite in the composite file at URL `/myposts/assets/minima-social-icons.svg`.
 
 The theme ships with an icon for `rss` and icons of select social-media platforms:
 
