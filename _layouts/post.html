@@ -36,6 +36,7 @@ layout: base
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+{% if post.comments != false %}
 <script src="https://giscus.app/client.js"
         data-repo="rozbeh/rozbeh.github.io"
         data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE0MzkxNTk="
@@ -51,3 +52,4 @@ layout: base
         crossorigin="anonymous"
         async>
 </script>
+{% endif %}
