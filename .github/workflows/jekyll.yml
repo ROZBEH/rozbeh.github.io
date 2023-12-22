@@ -1,0 +1,35 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - main  # Set to your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'  # Fetches submodules
+        token: ${{ secrets.WORKFLOW_TOKEN }}
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0.0'  # Updated Ruby version
+
+    - name: Build Jekyll site
+      run: |
+        gem install bundler
+        bundle install
+        bundle exec jekyll build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site  # Set to your Jekyll build directory
+
