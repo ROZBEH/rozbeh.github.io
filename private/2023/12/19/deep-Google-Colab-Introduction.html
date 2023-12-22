@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Google Colab Introduction | Rouzbeh Shirvani</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Google Colab Introduction" />
+<meta name="author" content="rozbeh" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Google Colab Introduction" />
+<meta property="og:description" content="Google Colab Introduction" />
+<meta property="og:site_name" content="Rouzbeh Shirvani" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-19T06:36:56+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Google Colab Introduction" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"rozbeh"},"dateModified":"2023-12-19T06:36:56+00:00","datePublished":"2023-12-19T06:36:56+00:00","description":"Google Colab Introduction","headline":"Google Colab Introduction","mainEntityOfPage":{"@type":"WebPage","@id":"/private/2023/12/19/deep-Google-Colab-Introduction.html"},"url":"/private/2023/12/19/deep-Google-Colab-Introduction.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/private/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Rouzbeh Shirvani" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Rouzbeh Shirvani</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Google Colab Introduction</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2023-12-19T06:36:56+00:00" itemprop="datePublished">
+        Dec 19, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this session we are going to talk about the basics Colab. These basics include:</p>
+<ul>
+  <li>Using Colab enivironment as command line</li>
+  <li>Reading file from local google drive</li>
+  <li>Reading file from your local machine</li>
+  <li>Downloading file to your local machine!</li>
+  <li>Using GPU!</li>
+  <li>Notes!</li>
+</ul>
+
+<h2 id="using-colab-environment-as-command-line">Using Colab environment as command line</h2>
+
+<p>By using excalamation mark in front of any command Colab will treat it as terminal command. For example one could use !ls to list the files in the current directory. Here are few examples:</p>
+
+<ol>
+  <li>!wget “http://datasets.d2.mpi-inf.mpg.de/MPIIGaze/MPIIGaze.tar.gz”
+  for downloading the file</li>
+  <li>!unzip myfile.zip
+  for unzipping myfile.zip file</li>
+  <li>!pip install -U -q PyDrive
+  Installing Python libraries</li>
+  <li>!apt-get install tar
+  Installing command line dependencies</li>
+  <li>!rm Test.py
+  removing the file Test.py from server</li>
+</ol>
+
+<h2 id="reading-file-from-google-drive-into-colab-environment">Reading file from google drive into Colab environment</h2>
+
+<p>If you are working with Python and you have a lot of files to deal with, it is more convinient to upload your files to Google Drive and read them from there. First you need to give access to Colab in order to read your files. I should also mention that Colab file should be stored in the same Google account as Google Drive. First use the following command to use the python utility for accessing Google drive!</p>
+
+<p><code class="language-plaintext highlighter-rouge">!pip install -U -q PyDrive</code></p>
+
+<p>Use the following code snippet in order to give access to your Google Drive.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import os
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+from google.Colab import auth
+from oauth2client.client import GoogleCredentials
+
+auth.authenticate_user()
+gauth = GoogleAuth()
+gauth.credentials = GoogleCredentials.get_application_default()
+drive = GoogleDrive(gauth)
+</code></pre></div></div>
+
+<p>Once you give access to Colab, now it’s time to specify the name of the folder that you want to read its containing files. For now we just focus on the files inside a folder NOT folders inside folder. The alphanumerical code like <code class="language-plaintext highlighter-rouge">1pqZR3iYuwvVAw6BhSXHymQysIQVG8bnb</code> specifies the link that shows in your browser when you are inside the specific folder. If you are inside a folder in Google Drive and look the browser URL, some codes like this will be at the end of URL.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_download_path = os.path.expanduser('~/data')
+try:
+  os.makedirs(local_download_path)
+except: pass
+
+file_list = drive.ListFile(
+    {'q': "'1pqZR3iYuwvVAw6BhSXHymQysIQVG8bnb' in parents"}).GetList()
+</code></pre></div></div>
+
+<p>Once you read this specific folder, all the files will be stored inside file_list. In order to read some specific files you can commands like the following one. This command will download the files from your Google Drive to the local folder on server.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for f in file_list:
+  print('title: %s, id: %s' % (f['title'], f['id']))
+  fname = os.path.join(local_download_path, f['title'])
+  print('downloading to {}'.format(fname))
+  f_ = drive.CreateFile({'id': f['id']})
+  f_.GetContentFile(fname)
+</code></pre></div></div>
+
+<p>Once the file is downloaded to the local folder on server which is usually on a folder like <code class="language-plaintext highlighter-rouge">/content/data/</code></p>
+
+<p>A little description about the following code snippet. Suppose we used the previous code snippet downloaded the <code class="language-plaintext highlighter-rouge">dev_brown.txt</code> file from Google Drive to local folder on server <code class="language-plaintext highlighter-rouge">/content/data/dev_brown.txt</code>, in order to read the file content and we just have to use the two following lines of python code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>text_file = open ("/content/data/dev_brown.txt",'r')
+lines = text_file.readlines()
+</code></pre></div></div>
+
+<h2 id="reading-file-from-your-local-machine-to-colab-environment">Reading file from your local machine to Colab environment</h2>
+
+<p>If you have a file in your local machine and you want to upload it to the server local drive, use the following code snippet!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from google.Colab import files
+uploaded = files.upload()
+for fn in uploaded.keys():
+  print('User uploaded file "{name}" with length {length} bytes'.format(
+      name=fn, length=len(uploaded[fn])))
+</code></pre></div></div>
+
+<h2 id="downloading-file-to-your-local-machine">Downloading file to your local machine</h2>
+<p>If you want to save some files from server into your local machine, use the following commands.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from google.Colab import files
+with open('example.txt', 'w') as f:
+  f.write('some content')
+files.download('example.txt')
+</code></pre></div></div>
+
+<h2 id="using-gpu">Using GPU!</h2>
+<p>If you would like to use GPU in your Python code. Go to Runtime on the menu and choose <code class="language-plaintext highlighter-rouge">Change runtime type</code> and then choose GPU in the <code class="language-plaintext highlighter-rouge">Hardware accelerator</code>.</p>
+
+<h2 id="notes">Notes</h2>
+
+<ul>
+  <li>
+    <p>If you want to connect the Colab to your local machine, try to use this link.
+https://research.google.com/colaboratory/local-runtimes.html</p>
+  </li>
+  <li>It is not to connect to a workspace on google Colab while another code is still running on the same work space! You should wait for the previous one to finish and then run your code!</li>
+  <li>You have 12 hours to finish your task on Colab otherwise all of your files and results will be deleted.</li>
+</ul>
+
+  </div><a class="u-url" href="/private/2023/12/19/deep-Google-Colab-Introduction.html" hidden></a>
+</article>
+
+<script src="https://giscus.app/client.js"
+        data-repo="rozbeh/rozbeh.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE0MzkxNTk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOB9WaN84Cb4IS"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name">rozbeh</li>
+          <li><a class="u-email" href="mailto:rouzbeh.asghari@gmail.com">rouzbeh.asghari@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li>
+  <a rel="me" href="https://github.com/rozbeh" target="_blank" title="github">
+    <svg class="svg-icon grey">
+      <use xlink:href="/private/assets/minima-social-icons.svg#github"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://www.linkedin.com/in/rozbeh" target="_blank" title="linkedin">
+    <svg class="svg-icon grey">
+      <use xlink:href="/private/assets/minima-social-icons.svg#linkedin"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://x.com/rouzbehshirvani" target="_blank" title="x">
+    <svg class="svg-icon grey">
+      <use xlink:href="/private/assets/minima-social-icons.svg#x"></use>
+    </svg>
+  </a>
+</li>
+</ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
+<script src="/private/assets/js/codebutton.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      macros: {
+          argmax: "\\mathop{\\rm arg\\,max}\\nolimits"
+        }
+    }
+  };
+  </script>
