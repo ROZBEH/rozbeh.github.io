@@ -44,7 +44,7 @@ minima:
   # solarized-light    Light variant of solarized color scheme.
   # solarized-dark     Dark variant of solarized color scheme.
   # solarized          Adaptive skin for solarized color scheme skins.
-  skin: auto
+  skin: solarized-light
   # disqus:
   #   shortname: rozbeh-github-io
   # Minima date format.
