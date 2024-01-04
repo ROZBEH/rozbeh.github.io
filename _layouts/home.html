@@ -104,6 +104,23 @@ layout: base
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
     <ul class="post-list">
+      <li>
+        <span class="post-meta">Jul 13, 2022</span>
+        <h3>
+          <a class="post-link" href="https://www.syntiant.com/news/ymbgv0jqtycg40sqp8fm4izkhqtjf3" target="_blank">
+            How Neural Architectures Leverage Duty Cycling for Massive Efficiencies
+          </a>
+        </h3>
+      </li>
+      <li>
+        <span class="post-meta">Jun 6, 2022</span>
+        <h3>
+          <a class="post-link" href="https://www.syntiant.com/news/this-is-a-te" target="_blank">
+            Modeling for the Edge: How neural network modelers should evaluate edge compute power
+          </a>
+        </h3>
+      </li>
+
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
       <li>
@@ -119,6 +136,8 @@ layout: base
       </li>
       {%- endfor -%}
     </ul>
+
+
 
     {% if site.paginate %}
       <div class="pager">
