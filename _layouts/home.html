@@ -104,29 +104,12 @@ layout: base
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
     <ul class="post-list">
-      <li>
-        <span class="post-meta">Jul 13, 2022</span>
-        <h3>
-          <a class="post-link" href="https://www.syntiant.com/news/ymbgv0jqtycg40sqp8fm4izkhqtjf3" target="_blank">
-            Optimizing Neural Networks
-          </a>
-        </h3>
-      </li>
-      <li>
-        <span class="post-meta">Jun 6, 2022</span>
-        <h3>
-          <a class="post-link" href="https://www.syntiant.com/news/this-is-a-te" target="_blank">
-            Machine Learning Modeling for the Edge Computing Era
-          </a>
-        </h3>
-      </li>
-
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
+          <a class="post-link" href="{{ post.url | relative_url }}" target="_blank">
             {{ post.title | escape }}
           </a>
         </h3>
