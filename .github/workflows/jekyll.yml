@@ -59,6 +59,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+          name: github-pages
           retention-days: 3
       - name: List available artifacts
         run: |
