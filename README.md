@@ -17,9 +17,18 @@ Add this line to your Jekyll site's Gemfile:
 gem "minima"
 ```
 
-And then execute:
+Install Jekyll
 
-    $ bundle
+    $ gem install jekyll bundler
+
+Navigate to Your Jekyll Project
+    $ cd your-jekyll-site
+
+Install Dependencies
+    $ bundle install
+
+Build & Serve Your Jekyll Site Locally
+    $ bundle exec jekyll serve
 
 
 ## Contents At-A-Glance
