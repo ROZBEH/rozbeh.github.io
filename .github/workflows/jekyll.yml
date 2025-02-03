@@ -59,13 +59,20 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-      # - name: List available artifacts
-      #   run: |
-      #     echo "Checking available artifacts..."
-      #     gh run artifacts --repo ${{ github.repository }}
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          etention-days: 3
+      - name: List available artifacts
+        run: |
+          echo "Checking available artifacts..."
+          gh run artifacts --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: _site
+      - name: Verify downloaded artifact
+        run: ls -la _site
 
   # Deployment job
   deploy:
