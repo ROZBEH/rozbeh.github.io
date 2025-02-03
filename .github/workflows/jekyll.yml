@@ -57,7 +57,7 @@ jobs:
         # uses: actions/upload-pages-artifact@v3
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: ./_site
 
   # Deployment job
   deploy:
