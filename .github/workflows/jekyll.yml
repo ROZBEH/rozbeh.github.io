@@ -59,20 +59,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-          etention-days: 3
+          retention-days: 3
       - name: List available artifacts
         run: |
           echo "Fetching list of uploaded artifacts..."
           curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" | jq
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: _site
-      - name: Verify downloaded artifact
-        run: ls -la _site
 
   # Deployment job
   deploy:
@@ -81,15 +74,6 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: _site
-      - name: Extract artifact
-        run: tar -xvf _site/artifact.tar -C _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
