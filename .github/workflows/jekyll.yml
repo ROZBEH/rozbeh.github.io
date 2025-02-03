@@ -61,12 +61,6 @@ jobs:
           path: _site
           name: github-pages
           retention-days: 3
-      - name: List available artifacts
-        run: |
-          echo "Fetching list of uploaded artifacts..."
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" | jq
 
   # Deployment job
   deploy:
